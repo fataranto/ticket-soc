@@ -27,6 +27,25 @@ io.on('connection', (socket) => {
 
     // la propiedad id es el identificador único de cliente que Socket.io ha otorgado al cliente que se ha conectado
     console.log("Nuevo ID de usuario conectado: ", socket.id);
+    //console.log(socket);
+
+    socket.on('pedir-turno', () => {
+        let numTicket = (Math.random() * 1000).toFixed();
+        //console.log(numTicket);
+        let nuevoTurno = {
+            id: socket.id,
+            ticket: numTicket
+        }
+
+        //console.log(nuevoTurno);
+        usernames.push(nuevoTurno);
+
+        socket.emit('enviar-turno', numTicket)
+
+    });
+
+    
+
 });
 
 server.listen(process.env.PORT || 3000, () => {

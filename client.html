@@ -38,6 +38,16 @@
         let btnTakeTicket = document.querySelector('#taketicket');
         let claimTicket = document.querySelector('#claimticket');
 
+        btnTakeTicket.addEventListener('click', () => {
+            socket.emit('pedir-turno');
+            btnTakeTicket.setAttribute('disabled', '')
+        });
+
+        socket.on('enviar-turno', (numTicket) => {
+        
+            document.querySelector('#ticketNumber span').textContent = numTicket;
+        })
+
 
     </script>
 </body>
